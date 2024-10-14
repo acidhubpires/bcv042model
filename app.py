@@ -10,11 +10,11 @@ _ = load_dotenv(find_dotenv())
 # Chave da API protegida (pegando a chave do arquivo .env)
 groq_api_key = os.getenv("GROQ_API_KEY")
 
-# Inicializa o modelo lhama3 com a chave API
-chat = ChatGroq(temperature=0.7, model_name="llama3-8b-8192", api_key=groq_api_key)
+# Inicializa o modelo llama3 com a chave API
+chat = ChatGroq(temperature=0.7, model_name="llama-3.2-3b-preview", api_key=groq_api_key)
 
 # Título do app
-st.title("AssistenteCorretor")
+st.title("BCVM42Model by Geotoken")
 
 # Estado de sessão para rastrear o nome do usuário e interações
 if "name" not in st.session_state:
@@ -26,12 +26,18 @@ if "messages" not in st.session_state:
 if "questions_asked" not in st.session_state:
     st.session_state.questions_asked = 0
 
-# Função para configurar o sistema de prompt com restrições de contexto
+# Função para configurar o sistema de prompt com restrições de contexto para o modelo Verra VM0042
 def get_system_prompt():
     return """
-    Você é um assistente especializado em ajudar usuários com questões relacionadas ao mercado imobiliário. 
-    Não responda perguntas que não sejam sobre imóveis, compra, venda, aluguel, ou outros tópicos diretamente relacionados ao mercado imobiliário.
-    Se uma pergunta estiver fora do contexto do mercado imobiliário, gentilmente explique ao usuário que você só pode responder perguntas dentro desse contexto.
+    Você é um especialista em modelagem matemática de projetos de créditos de carbono, especialmente seguindo a metodologia VM0042 da Verra.
+    Sua função é auxiliar em questões técnicas relacionadas à geração de créditos de carbono no contexto do agronegócio, incluindo:
+    - Cálculos de sequestro de carbono
+    - Monitoramento, Relatório e Verificação (MRV) em projetos de carbono
+    - Modelos de baseline para reduções de emissões
+    - Certificação e verificação de créditos de carbono
+    - Aplicações da metodologia VM0042 no setor agrícola e florestal
+
+    Não responda perguntas que estejam fora do escopo de carbono, agricultura ou a metodologia Verra VM0042. Se o usuário fizer uma pergunta fora do contexto, gentilmente informe que só pode responder questões relacionadas a esses temas.
     """
 
 # Fluxo inicial: Nome do usuário
@@ -40,7 +46,7 @@ if not st.session_state.name:
 
 # Exibe mensagem de boas-vindas e perguntas pré-definidas após inserir o nome
 if st.session_state.name:
-    st.write(f"Bem-vindo, {st.session_state.name}! Este assistente só responde perguntas relacionadas ao mercado imobiliário.")
+    st.write(f"Bem-vindo, {st.session_state.name}! Este assistente responde a perguntas relacionadas à metodologia VM0042 da Verra e créditos de carbono no agronegócio.")
 
     # Verificar se restam duas perguntas e mostrar um aviso
     if st.session_state.questions_asked == 8:
@@ -48,13 +54,13 @@ if st.session_state.name:
 
     # Limita o número de perguntas para 10 por sessão
     if st.session_state.questions_asked < 10:
-        # Opções de perguntas pré-definidas
+        # Opções de perguntas pré-definidas focadas em créditos de carbono e agronegócios
         questions = [
-            "Como conseguir compradores (leads)?",
-            "Onde encontrar imóveis?",
-            "Como divulgar um imóvel nas redes sociais?",
-            "Como fazer um hot-site com fotos?",
-            "Criar um modelo de contrato de visita, compra e venda."
+            "Como posso calcular o sequestro de carbono em um projeto agrícola?",
+            "Quais são os principais componentes do MRV na metodologia VM0042?",
+            "Como determinar o baseline para reduções de emissões em projetos de carbono?",
+            "Quais são os critérios para certificação de créditos de carbono no setor agrícola?",
+            "Como aplicar a metodologia VM0042 em projetos florestais?"
         ]
 
         # Exibe uma seleção de perguntas pré-definidas
