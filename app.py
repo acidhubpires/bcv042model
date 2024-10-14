@@ -3,6 +3,7 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv, find_dotenv
 import os
 import json
+# Desenvolvido por PIRESAAO, ACIDHUB 2024, Geotoken Engine Support
 
 # Carrega variáveis de ambiente
 _ = load_dotenv(find_dotenv())
@@ -14,7 +15,7 @@ groq_api_key = os.getenv("GROQ_API_KEY")
 chat = ChatGroq(temperature=0.7, model_name="llama-3.2-3b-preview", api_key=groq_api_key)
 
 # Título do app
-st.title("BCVM42Model by Geotoken")
+st.title("BCVM42Model by Geotoken 2024")
 
 # Estado de sessão para rastrear o nome do usuário e interações
 if "name" not in st.session_state:
