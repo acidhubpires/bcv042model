@@ -26,18 +26,21 @@ if "messages" not in st.session_state:
 if "questions_asked" not in st.session_state:
     st.session_state.questions_asked = 0
 
-# Função para configurar o sistema de prompt com restrições de contexto para o modelo Verra VM0042
+# Função para configurar o sistema de prompt com o novo escopo
 def get_system_prompt():
     return """
-    Você é um especialista em modelagem matemática de projetos de créditos de carbono, especialmente seguindo a metodologia VM0042 da Verra.
-    Sua função é auxiliar em questões técnicas relacionadas à geração de créditos de carbono no contexto do agronegócio, incluindo:
+    Você é um especialista em modelagem matemática, GIS, Blockchain e tokens georreferenciados, aplicados à criação de créditos de carbono seguindo a metodologia VM0042 da Verra. Seu foco é fornecer explicações detalhadas sobre o ciclo de vida de créditos de carbono, certificação, verificação dos créditos e como integrar essas práticas com tecnologias inovadoras, como geotokens e Digital MRV.
+
+    Os principais tópicos incluem:
     - Cálculos de sequestro de carbono
-    - Monitoramento, Relatório e Verificação (MRV) em projetos de carbono
+    - Monitoramento, Relatório e Verificação (MRV) digital para projetos de carbono
     - Modelos de baseline para reduções de emissões
     - Certificação e verificação de créditos de carbono
-    - Aplicações da metodologia VM0042 no setor agrícola e florestal
+    - Aplicação da metodologia VM0042 no setor agrícola e florestal
+    - A rastreabilidades dos RWA's  e ciclo de vida por meio de geotokens (tokens espaços temporais) em projetos de carbono, desde a criação até a comercialização e aposentadoria
+    - Integração de Digital MRV com IoT e blockchain para garantir rastreamento, verificação e transparência dos dados de projetos de carbono
 
-    Não responda perguntas que estejam fora do escopo de carbono, agricultura ou a metodologia Verra VM0042. Se o usuário fizer uma pergunta fora do contexto, gentilmente informe que só pode responder questões relacionadas a esses temas.
+    Não responda perguntas fora do escopo de créditos de carbono, VM0042, geotokens ou Digital MRV.
     """
 
 # Fluxo inicial: Nome do usuário
@@ -46,7 +49,7 @@ if not st.session_state.name:
 
 # Exibe mensagem de boas-vindas e perguntas pré-definidas após inserir o nome
 if st.session_state.name:
-    st.write(f"Bem-vindo, {st.session_state.name}! Este assistente responde a perguntas relacionadas à metodologia VM0042 da Verra e créditos de carbono no agronegócio.")
+    st.write(f"Bem-vindo, {st.session_state.name}! Este assistente responde a perguntas relacionadas à metodologia VM0042 da Verra, geotokens e Digital MRV.")
 
     # Verificar se restam duas perguntas e mostrar um aviso
     if st.session_state.questions_asked == 8:
@@ -54,13 +57,13 @@ if st.session_state.name:
 
     # Limita o número de perguntas para 10 por sessão
     if st.session_state.questions_asked < 10:
-        # Opções de perguntas pré-definidas focadas em créditos de carbono e agronegócios
+        # Opções de perguntas pré-definidas focadas no novo escopo
         questions = [
-            "Como posso calcular o sequestro de carbono em um projeto agrícola?",
-            "Quais são os principais componentes do MRV na metodologia VM0042?",
-            "Como determinar o baseline para reduções de emissões em projetos de carbono?",
-            "Quais são os critérios para certificação de créditos de carbono no setor agrícola?",
-            "Como aplicar a metodologia VM0042 em projetos florestais?"
+            "Como aplicar a metodologia VM0042 em um projeto de carbono agrícola?",
+            "Como funciona o ciclo de vida de um geotoken em um projeto de carbono?",
+            "Quais são os critérios de certificação de créditos de carbono na metodologia VM0042?",
+            "Como integrar IoT e Digital MRV em um projeto de carbono?",
+            "Como calcular o baseline de emissões usando a VM0042?"
         ]
 
         # Exibe uma seleção de perguntas pré-definidas
